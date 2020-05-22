@@ -25,7 +25,8 @@ public class Principale {
         return IOUtils.toString(new FileInputStream(filePath), "UTF-8");
     }
 
-    public static boolean evalEligibilite(String path) throws IOException, FileNotFoundException, Exception {
+    public static boolean evalEligibilite(String path) throws IOException,
+            FileNotFoundException, ClassCastException {
         JSONObject root = (JSONObject) JSONSerializer.toJSON
                 (loadFileIntoString(path));
         boolean eligible = true;
@@ -34,11 +35,10 @@ public class Principale {
         boolean biFumeur =(boolean)root.getJSONObject("fumeur").get("tabac") &&
                 (boolean)root.getJSONObject("fumeur").get("cannabis");
 
-        eligible = age < AGE_MIN ? false:eligible;
-        eligible = genre == FEMME && age > AGE_MAX_FEM ? false:eligible;
-        eligible = genre == HOMME && age > AGE_MAX_HOM ? false:eligible;
-        eligible = biFumeur ? false:eligible;
-
+        eligible = age < AGE_MIN ? false:
+                genre == FEMME && age > AGE_MAX_FEM ? false:
+                        genre == HOMME && age > AGE_MAX_HOM ? false:
+                                biFumeur ? false:eligible;
         return eligible;
     }
 
@@ -50,8 +50,8 @@ public class Principale {
             System.err.println("FileNotFoundException");
         } catch (IOException ioe) {
             System.err.println("IOException");
-        } catch (Exception e) {
-            System.err.println("Probablement une erreur de casting");
+        } catch (ClassCastException cce) {
+            System.err.println("Exception de casting");
         }
     }
 }
