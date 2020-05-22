@@ -1,0 +1,10 @@
+{
+    "nom": "Jacques Berger",
+    "genre": 1,
+    "age": 18,
+    "fumeur": {
+        "tabac": true,
+        "cannabis": false
+    },
+    "alcool": true
+}
