@@ -8,7 +8,12 @@ import org.apache.commons.io.IOUtils;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/**
+ * Evalue un fichier de demande d'assurance JSON et cree un
+ * fichier de reponse JSON.
+ */
 public class Soumission {
+    //constantes
     public static final int AGE_MIN = 18;
     public static final int AGE_MAX_FEM = 85;
     public static final int AGE_MAX_HOM = 80;
@@ -22,21 +27,56 @@ public class Soumission {
     public static final String MSG_ERR_EXCEPTION = "Probleme general";
     public static final String MSG_FIN_NORMALE = "Fin normale du programme";
 
+    /**
+     * Lit un fichier et le met sous forme de String.
+     *
+     * @param filePath  Le chemin du fichier que l'on desire avoir en String.
+     * @return  Le fichier sous forme de String.
+     * @throws FileNotFoundException  Si il y a erreur en cherchant le fichier.
+     * @throws IOException  S'il y a erreur dans la lecture du fichier.
+     */
     public static String fichierVersString(String filePath)
             throws FileNotFoundException, IOException {
         return IOUtils.toString(new FileInputStream(filePath), "UTF-8");
     }
+
+    /**
+     * Cree un fichier a partir d'un String.
+     *
+     * @param filePath  Le chemin du fichier a creer.
+     * @param contenu  Le String a mettre dans le fichier.
+     * @throws IOException  S'il y a erreur dans l'ecriture du fichier.
+     */
     public static void stringVersFichier(String filePath, String contenu)
             throws IOException {
         File fichier = new File(filePath);
         FileUtils.writeStringToFile(fichier, contenu, "UTF-8");
     }
+
+    /**
+     * Cree un objet JSON avec @param reponse et initialise le processus
+     * de creation de fichier.
+     *
+     * @param filePath  Le chemin du fichier a creer.
+     * @param reponse  La reponse de l'evaluation.
+     * @throws IOException  S'il y a erreur dans l'ecriture du fichier.
+     */
     public static void reponseEligibilite(String filePath, boolean reponse)
             throws IOException {
         JSONObject jObject = new JSONObject();
         jObject.put("eligible", reponse);
         stringVersFichier(filePath, jObject.toString(1));
     }
+
+    /**
+     * Evalue l'eligibilite de la soumission d'assurance.
+     *
+     * @param filePath  Le chemin du fichier de la soumission d'assurance.
+     * @return  Si la soumission est eligible ou non.
+     * @throws IOException  S'il y a une erreur dans la lecture du fichier.
+     * @throws FileNotFoundException  S'il y a erreur en cherchant le fichier.
+     * @throws ClassCastException S'il y a erreur dans les donnees du fichier.
+     */
     public static boolean evalEligibilite(String filePath) throws IOException,
             FileNotFoundException, ClassCastException {
         JSONObject root = (JSONObject) JSONSerializer.toJSON
