@@ -1,0 +1,11 @@
+{
+  "nom":"",
+  "genre": 0,
+  "age": "erreur",
+  "fumeur":
+  {
+    "tabac": 1,
+    "cannabis": 4
+  },
+  "alcool": true
+}
