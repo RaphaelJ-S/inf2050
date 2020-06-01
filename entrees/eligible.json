@@ -1,0 +1,10 @@
+{
+  "nom": "Whitney Houston",
+  "genre": 2,
+  "age": 85,
+  "fumeur": {
+    "tabac": true,
+    "cannabis": false
+  },
+  "alcool": true
+}

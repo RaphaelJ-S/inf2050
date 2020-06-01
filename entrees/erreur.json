@@ -1,0 +1,11 @@
+{
+  "nom": "Robert Stark",
+  "genre": 1,
+  "age": 85,
+  "fumeur": {
+    "tabac": true,
+    "cannabis": false
+  }
+  "alcool": true
+}
+
