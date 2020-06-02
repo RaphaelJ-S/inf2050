@@ -49,6 +49,7 @@ public class Soumission {
 
         JSONObject root = (JSONObject) JSONSerializer.toJSON
                 (DiskFile.loadFileIntoString(filePath));
+        String nom = (String)root.get("nom");
         boolean eligible = true;
         int age = (int)root.get("age");
         int genre = (int)root.get("genre");
