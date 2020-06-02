@@ -1,5 +1,7 @@
 package TP1;
 
+import net.sf.json.JSONException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -23,6 +25,8 @@ public class Principale {
             "\nLe fichier de sortie n'a pas ete cree.";
     public static final String MSG_ERR_EXCEPTION = "Probleme general. \n" +
             "Le fichier de sortie n'a pas ete cree.";
+    public static final String MSG_ERR_JSON = "Probleme de format JSON. \n"+
+            "Le fichier de sortie na pas ete cree.";
     public static final String MSG_FIN_NORMALE = "Fin normale du programme";
 
     public static void main(String[] args) {
@@ -46,6 +50,8 @@ public class Principale {
             System.err.println(MSG_ERR_IO);
         } catch (ClassCastException cce) {
             System.err.println(MSG_ERR_CAST);
+        } catch (JSONException je) {
+            System.err.println(MSG_ERR_JSON);
         } catch (Exception e) {
             System.err.println(MSG_ERR_EXCEPTION);
         }

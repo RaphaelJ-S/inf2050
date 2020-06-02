@@ -2,6 +2,8 @@ package TP1;
 
 
 import java.io.IOException;
+
+import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 import java.io.FileNotFoundException;
@@ -27,7 +29,7 @@ public class Soumission {
      * @throws IOException  S'il y a erreur dans l'ecriture du fichier.
      */
     public static void reponseEligibilite(String filePath, boolean reponse)
-            throws IOException {
+            throws IOException, JSONException {
         JSONObject jObject = new JSONObject();
         jObject.put("eligible", reponse);
         DiskFile.saveStringIntoFile(filePath, jObject.toString(1));
@@ -43,7 +45,7 @@ public class Soumission {
      * @throws ClassCastException S'il y a erreur dans les donnees du fichier.
      */
     public static boolean evalEligibilite(String filePath) throws IOException,
-            FileNotFoundException, ClassCastException {
+            FileNotFoundException, ClassCastException, JSONException {
 
         JSONObject root = (JSONObject) JSONSerializer.toJSON
                 (DiskFile.loadFileIntoString(filePath));
