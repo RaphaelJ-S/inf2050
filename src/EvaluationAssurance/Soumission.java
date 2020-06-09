@@ -25,13 +25,13 @@ public class Soumission {
     public static final int SANS_GENRE_OPT1 = 0;
     public static final int SANS_GENRE_OPT2 = 9;
     //attributs
-    protected String nom;
-    protected int genre;
-    protected int age;
-    protected JSONObject fumeur;
-    protected boolean alcool;
-    protected JSONArray antecedants;
-    protected JSONArray sports;
+    private String nom;
+    private int genre;
+    private int age;
+    private JSONObject fumeur;
+    private boolean alcool;
+    private JSONArray antecedants;
+    private JSONArray sports;
 
     public Soumission(String filePath) {
         setter(filePath);
@@ -71,7 +71,7 @@ public class Soumission {
                     (DiskFile.loadFileIntoString(filePath));
 
             nom = (String)root.get("nom");
-            genre= (int)root.get("genre");
+            validationGenre((int)root.get("genre"));
             age = calculAge((String)root.get("date_de_naissance"));
             fumeur = (JSONObject)root.get("fumeur");
             alcool = (boolean)root.get("alcool");
@@ -79,9 +79,23 @@ public class Soumission {
             sports = (JSONArray)root.get("sports");
 
         } catch (FileNotFoundException fnfe) {
-
+            System.err.println("Erreur");
+            System.exit(-1);
         } catch (IOException ioe) {
+            System.err.println("Erreur");
+            System.exit(-1);
+        }catch (ParamException pe) {
+            System.out.println(pe);
+            System.exit(-1);
+        }
+    }
+    private void validationGenre(int genre) throws ParamException{
 
+        if(genre == HOMME || genre == FEMME || genre ==SANS_GENRE_OPT1 ||
+                genre == SANS_GENRE_OPT2){
+            this.genre = genre;
+        }else {
+            throw new ParamException("Genre invalide");
         }
     }
 
