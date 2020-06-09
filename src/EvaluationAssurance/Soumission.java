@@ -3,10 +3,12 @@ package TP1;
 
 import java.io.IOException;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 /**
  * Evalue un fichier de demande d'assurance JSON et cree un
@@ -19,6 +21,34 @@ public class Soumission {
     public static final int AGE_MAX_HOM = 80;
     public static final int HOMME = 1;
     public static final int FEMME = 2;
+    //attributs
+    public String nom;
+    public int genre;
+    public String dateNaissance;
+    public JSONObject fumeur;
+    public boolean alcool;
+    public JSONArray antecedants;
+    public JSONArray sports;
+
+    public Soumission(String filePath) {
+        try {
+            JSONObject root = (JSONObject) JSONSerializer.toJSON
+                    (DiskFile.loadFileIntoString(filePath));
+            nom = (String)root.get("nom");
+            genre= (int)root.get("genre");
+            dateNaissance = (String)root.get("date_de_naissance");
+            fumeur = (JSONObject)root.get("fumeur");
+            alcool = (boolean)root.get("alcool");
+            antecedants = (JSONArray)root.get("antecedants");
+            sports = (JSONArray)root.get("sports");
+
+        } catch (FileNotFoundException fnfe) {
+
+        } catch (IOException ioe) {
+
+        }
+
+    }
 
     /**
      * Cree un objet JSON avec @param reponse et initialise le processus
@@ -44,18 +74,11 @@ public class Soumission {
      * @throws FileNotFoundException  S'il y a erreur en cherchant le fichier.
      * @throws ClassCastException S'il y a erreur dans les donnees du fichier.
      */
-    public static boolean evalEligibilite(String filePath) throws IOException,
+    public boolean evalEligibilite(String filePath) throws IOException,
             FileNotFoundException, ClassCastException, JSONException {
-
-        JSONObject root = (JSONObject) JSONSerializer.toJSON
-                (DiskFile.loadFileIntoString(filePath));
-        String nom = (String)root.get("nom");
         boolean eligible = true;
-        int age = (int)root.get("age");
-        int genre = (int)root.get("genre");
-        boolean biFumeur =(boolean)root.getJSONObject("fumeur").get("tabac") &&
-                (boolean)root.getJSONObject("fumeur").get("cannabis");
-
+        int age = 2020 - Integer.getInteger(dateNaissance.substring(0,5));
+        boolean biFumeur;
         return age < AGE_MIN ? false:
                 genre == FEMME && age > AGE_MAX_FEM ? false:
                         genre == HOMME && age > AGE_MAX_HOM ? false:
