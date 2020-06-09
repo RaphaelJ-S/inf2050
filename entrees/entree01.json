@@ -1,11 +1,23 @@
 {
   "nom": "Jacques Berger",
-  "genre": 1,
-  "age": 80,
-  "fumeur":
+  "genre": 0,
+  "date_de_naissance": "1956-12-03",
+  "fumeur": {
+    "tabac": false,
+    "cannabis": true
+  },
+  "alcool": true,
+  "antecedants": [
     {
-      "tabac": false,
-      "cannabis": false
+      "diagnostic": "Colon irritable",
+      "depuis": "2010-10-04"
     },
-  "alcool": true
+    {
+      "diagnostic": "COVID-19",
+      "depuis": "2020-01-03"
+    }
+  ],
+  "sports": [
+    "Soccer", "Baseball"
+  ]
 }
