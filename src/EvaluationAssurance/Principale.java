@@ -1,9 +1,4 @@
-package TP1;
-
-import net.sf.json.JSONException;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package EvaluationAssurance;
 
 /**
  * Nom: Raphaël Jacob-Simard
@@ -31,6 +26,7 @@ public class Principale {
 
     public static void main(String[] args) {
        Soumission essais = new Soumission("entrees/entree01.json");
+       /*
        System.out.println(essais.nom);
        System.out.println(essais.genre);
        System.out.println(essais.dateNaissance);
@@ -40,6 +36,10 @@ public class Principale {
        System.out.println(essais.sports.get(0));
        System.out.println(essais.antecedants.getJSONObject(0).get("diagnostic"));
        System.out.println(essais.antecedants.getJSONObject(1).get("depuis"));
+       */
+
+
+       System.out.println(essais.evalEligibilite());
 
 
 

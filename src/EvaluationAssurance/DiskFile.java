@@ -1,4 +1,4 @@
-package TP1;/*
+package EvaluationAssurance;/*
  * Copyright 2015 Jacques Berger.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

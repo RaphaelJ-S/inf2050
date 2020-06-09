@@ -1,4 +1,4 @@
-package TP1;
+package EvaluationAssurance;
 
 public class ParamException extends Exception{
 
