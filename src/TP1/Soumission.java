@@ -1,6 +1,12 @@
 package TP1;
 
 
+<<<<<<< HEAD
+=======
+import java.io.IOException;
+
+import net.sf.json.JSONException;
+>>>>>>> f468987cac80dc883a66822c4dcf863a29d57b68
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 
@@ -27,7 +33,9 @@ public class Soumission {
      * @param reponse  La reponse de l'evaluation.
      * @throws IOException S'il y a erreur dans l'ecriture du fichier.
      */
-    public static void reponseEligibilite(String filePath, boolean reponse) throws IOException {
+
+    public static void reponseEligibilite(String filePath, boolean reponse)
+            throws IOException, JSONException {
         JSONObject jObject = new JSONObject();
         jObject.put("eligible", reponse);
         DiskFile.saveStringIntoFile(filePath, jObject.toString(1));
@@ -43,9 +51,12 @@ public class Soumission {
      * @throws FileNotFoundException S'il y a erreur en cherchant le fichier.
      * @throws ClassCastException    S'il y a erreur dans les donnees du fichier.
      */
-    public static boolean evalEligibilite(String filePath) throws IOException, FileNotFoundException, ClassCastException {
+    public static boolean evalEligibilite(String filePath) throws IOException,
+            FileNotFoundException, ClassCastException, JSONException {
 
-        JSONObject root = (JSONObject) JSONSerializer.toJSON(DiskFile.loadFileIntoString(filePath));
+        JSONObject root = (JSONObject) JSONSerializer.toJSON
+                (DiskFile.loadFileIntoString(filePath));
+        String nom = (String)root.get("nom");
         boolean eligible = true;
 
         int age = (int) root.get("age");
