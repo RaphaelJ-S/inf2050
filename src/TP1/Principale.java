@@ -1,5 +1,7 @@
 package TP1;
 
+import net.sf.json.JSONException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -11,18 +13,11 @@ import java.io.IOException;
  * Professeur: Jacques Berger
  */
 public class Principale {
-    public static final String MSG_ERR_CAST = "Probleme de cast. \n" +
-            "Le fichier de sortie n'a pas ete cree.";
-    public static final String MSG_ERR_IO = "Probleme de lecture/ecriture. \n" +
-            "Le fichier de sortie n'a pas ete cree.";
-    public static final String MSG_ERR_FILENOTFOUND = "Ce fichier n'existe pas." +
-            "\nLe fichier de sortie n'a pas ete cree.";
-    public static final String MSG_ERR_PARAM = "Probleme dans les parametres." +
-            "\nIl doit y avoir exactement 2 parametres: fichier d'entree, " +
-            "fichier sortie." +
-            "\nLe fichier de sortie n'a pas ete cree.";
-    public static final String MSG_ERR_EXCEPTION = "Probleme general. \n" +
-            "Le fichier de sortie n'a pas ete cree.";
+    public static final String MSG_ERR_CAST = "Probleme de cast. \n" + "Le fichier de sortie n'a pas ete cree.";
+    public static final String MSG_ERR_IO = "Probleme de lecture/ecriture. \n" + "Le fichier de sortie n'a pas ete cree.";
+    public static final String MSG_ERR_FILENOTFOUND = "Ce fichier n'existe pas." + "\nLe fichier de sortie n'a pas ete cree.";
+    public static final String MSG_ERR_PARAM = "Probleme dans les parametres." + "\nIl doit y avoir exactement 2 parametres: fichier d'entree, " + "fichier sortie." + "\nLe fichier de sortie n'a pas ete cree.";
+    public static final String MSG_ERR_EXCEPTION = "Probleme general. \n" + "Le fichier de sortie n'a pas ete cree.";
     public static final String MSG_FIN_NORMALE = "Fin normale du programme";
 
     public static void main(String[] args) {
@@ -46,6 +41,11 @@ public class Principale {
             System.err.println(MSG_ERR_IO);
         } catch (ClassCastException cce) {
             System.err.println(MSG_ERR_CAST);
+
+
+        } catch (JSONException je) {
+            System.err.println("erreur ecriture");
+
         } catch (Exception e) {
             System.err.println(MSG_ERR_EXCEPTION);
         }
