@@ -37,9 +37,8 @@ public class Principale {
        System.out.println(essais.antecedants.getJSONObject(0).get("diagnostic"));
        System.out.println(essais.antecedants.getJSONObject(1).get("depuis"));
        */
-
-
-       System.out.println(essais.evalEligibilite());
+       CalculAssurance test = new CalculAssurance(essais);
+       System.out.println();
 
 
 
