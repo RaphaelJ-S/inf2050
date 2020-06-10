@@ -1,7 +1,6 @@
 package EvaluationAssurance;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 public class CalculAssurance {
 
@@ -11,6 +10,9 @@ public class CalculAssurance {
 
 
     public CalculAssurance(Soumission soumission) {
+       setCalculAssurance(soumission);
+    }
+    public void setCalculAssurance(Soumission soumission) {
         int age = soumission.getAge();
         int genre = soumission.getGenre();
         montantBase = validationMontantBase(age, genre);
@@ -42,24 +44,26 @@ public class CalculAssurance {
         }
         return montant;
     }
-    private double validationMontantFinal(Soumission soumission) {
-        double montantF = montantBase;
+    public double validationMontantFinal(Soumission soumission) {
+        double montantF = 0;
         boolean fumeur = (boolean)soumission.getFumeur().get("tabac") ||
                 (boolean)soumission.getFumeur().get("cannabis");
-        boolean aEuLeCancer = siCancer(soumission.getAntecedants());
+        boolean aEuLeCancer = siCancer(soumission.getAntecedents());
 
         montantF += fumeur ? 100 : 0;
         montantF += (soumission.isAlcool() ? montantBase * 0.05 : 0);
-        montantF += (soumission.getAntecedants().size() > 2 ?
-                montantBase * 0.15 : 1);
+        montantF += (soumission.getAntecedents().size() > 2 ?
+                montantBase * 0.15 : 0);
         montantF += soumission.getSports().size() == 0 ? 25 : 0;
-        montantF += aEuLeCancer ? montantBase * 0.5 : 1;
-        return montantF;
+        montantF += aEuLeCancer ? montantBase * 0.5 : 0;
+
+        return montantF + montantBase;
     }
-    private boolean siCancer(JSONArray antecedants) {
+    private boolean siCancer(JSONArray antecedents) {
         boolean reponse = false;
-        for (int i = 0 ; i < antecedants.size() ; i++ ) {
-            String diagnostic = (String)antecedants.getJSONObject(i)
+
+        for (int i = 0 ; i < antecedents.size() ; i++ ) {
+            String diagnostic = (String)antecedents.getJSONObject(i)
                     .get("diagnostic");
             if(diagnostic.startsWith("Cancer")) {
                 reponse = true;

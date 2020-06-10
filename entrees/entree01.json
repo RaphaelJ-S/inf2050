@@ -1,13 +1,13 @@
 {
   "nom": "Jacques Berger",
-  "genre": 4,
-  "date_de_naissance": "1945-12-03",
+  "genre": 1,
+  "date_de_naissance": "1956-12-03",
   "fumeur": {
     "tabac": false,
     "cannabis": true
   },
   "alcool": true,
-  "antecedants": [
+  "antecedents": [
     {
       "diagnostic": "Colon irritable",
       "depuis": "2010-10-04"

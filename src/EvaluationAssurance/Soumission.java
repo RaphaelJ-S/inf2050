@@ -30,11 +30,11 @@ public class Soumission {
     private int age;
     private JSONObject fumeur;
     private boolean alcool;
-    private JSONArray antecedants;
+    private JSONArray antecedents;
     private JSONArray sports;
 
     public Soumission(String filePath) {
-        setter(filePath);
+        setSoumission(filePath);
     }
 
     public int getAge() {
@@ -49,8 +49,8 @@ public class Soumission {
         return alcool;
     }
 
-    public JSONArray getAntecedants() {
-        return antecedants;
+    public JSONArray getAntecedents() {
+        return antecedents;
     }
 
     public JSONArray getSports() {
@@ -65,7 +65,7 @@ public class Soumission {
         return nom;
     }
 
-    public void setter(String filePath) {
+    public void setSoumission(String filePath) {
         try {
             JSONObject root = (JSONObject) JSONSerializer.toJSON
                     (DiskFile.loadFileIntoString(filePath));
@@ -75,7 +75,7 @@ public class Soumission {
             age = calculAge((String)root.get("date_de_naissance"));
             fumeur = (JSONObject)root.get("fumeur");
             alcool = (boolean)root.get("alcool");
-            antecedants = (JSONArray)root.get("antecedants");
+            antecedents = (JSONArray)root.get("antecedents");
             sports = (JSONArray)root.get("sports");
 
         } catch (FileNotFoundException fnfe) {

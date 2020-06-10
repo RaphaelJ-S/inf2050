@@ -26,20 +26,9 @@ public class Principale {
 
     public static void main(String[] args) {
        Soumission essais = new Soumission("entrees/entree01.json");
-       /*
-       System.out.println(essais.nom);
-       System.out.println(essais.genre);
-       System.out.println(essais.dateNaissance);
-       System.out.println(essais.fumeur.get("tabac"));
-       System.out.println(essais.fumeur.get("cannabis"));
-       System.out.println(essais.alcool);
-       System.out.println(essais.sports.get(0));
-       System.out.println(essais.antecedants.getJSONObject(0).get("diagnostic"));
-       System.out.println(essais.antecedants.getJSONObject(1).get("depuis"));
-       */
-       CalculAssurance test = new CalculAssurance(essais);
-       System.out.println();
 
+       CalculAssurance test = new CalculAssurance(essais);
+        System.out.println(test.validationMontantFinal(essais));
 
 
         //main du TP1
