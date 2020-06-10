@@ -1,5 +1,11 @@
 package EvaluationAssurance;
 
+import net.sf.json.JSONException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.DateTimeException;
+
 /**
  * Nom: Raphaël Jacob-Simard
  * Code Permanant: JACR26038907
@@ -23,38 +29,39 @@ public class Principale {
     public static final String MSG_ERR_JSON = "Probleme de format JSON. \n"+
             "Le fichier de sortie na pas ete cree.";
     public static final String MSG_FIN_NORMALE = "Fin normale du programme";
+    public static final String MSG_ERR_DATE = "Probleme dans le format de la" +
+            "date. \nLe fichier de sortie na pas ete cree.";
 
     public static void main(String[] args) {
-       Soumission essais = new Soumission("entrees/entree01.json");
-
-       CalculAssurance test = new CalculAssurance(essais);
-        System.out.println(test.validationMontantFinal(essais));
 
 
-        //main du TP1
-       /* try {
+       try {
             if (args.length != 2) {
-                throw new ParamException();
+                throw new ParamException(MSG_ERR_PARAM);
             }
             String cheminEntree = args[0];
             String cheminSortie = args[1];
-
-            Soumission.reponseEligibilite(cheminSortie, Soumission.
-                    evalEligibilite(cheminEntree));
+            Soumission evaluation = new Soumission(cheminEntree);
+            CalculAssurance calculAssurance = new CalculAssurance(evaluation);
+            Soumission.reponseEligibilite(cheminSortie,
+                    evaluation.evalEligibilite(), calculAssurance);
             System.out.println(MSG_FIN_NORMALE);
 
-        } catch (ParamException pe) {
-            System.err.println(MSG_ERR_PARAM);
-        } catch (FileNotFoundException fnfe) {
+       } catch (ParamException pe) {
+            System.err.println(pe.getMessage());
+            System.exit(-1);
+       } catch (FileNotFoundException fnfe) {
             System.err.println(MSG_ERR_FILENOTFOUND);
-        } catch (IOException ioe) {
+       } catch (IOException ioe) {
             System.err.println(MSG_ERR_IO);
-        } catch (ClassCastException cce) {
+       } catch (ClassCastException cce) {
             System.err.println(MSG_ERR_CAST);
-        } catch (JSONException je) {
-            System.err.println(MSG_ERR_JSON);
-        } catch (Exception e) {
+       } catch (JSONException je) {
+           System.err.println(MSG_ERR_JSON);
+       } catch (DateTimeException dte) {
+           System.err.println(MSG_ERR_DATE);
+       } catch (Exception e) {
             System.err.println(MSG_ERR_EXCEPTION);
-        }*/
+       }
     }
 }
