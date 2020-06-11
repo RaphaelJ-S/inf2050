@@ -1,7 +1,6 @@
 package EvaluationAssurance;
 
 import net.sf.json.JSONException;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -43,6 +42,8 @@ public class Principale {
             String cheminSortie = args[1];
             Soumission evaluation = new Soumission(cheminEntree);
             CalculAssurance calculAssurance = new CalculAssurance(evaluation);
+
+            System.out.println(evaluation.getAge());
             Soumission.reponseEligibilite(cheminSortie,
                     evaluation.evalEligibilite(), calculAssurance);
             System.out.println(MSG_FIN_NORMALE);

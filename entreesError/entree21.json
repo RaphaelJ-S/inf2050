@@ -1,12 +1,11 @@
-{
-  "nom": "Jacques Berger",
+{"nom": "Jacques Berger",
   "genre": 1,
   "date_de_naissance": "1956-12-03",
   "fumeur": {
     "tabac": false,
-    "cannabis": true
+    "cannabis": false
   },
-  "alcool": true,
+  "alcool": false,
   "antecedents": [
     {
       "diagnostic": "Colon irritable",
@@ -17,7 +16,4 @@
       "depuis": "2020-01-03"
     }
   ],
-  "sports": [
-    "Soccer", "Baseball"
-  ]
-}
+  "sports": ["Baseball","Soccer"]}
