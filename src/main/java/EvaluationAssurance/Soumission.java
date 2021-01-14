@@ -112,11 +112,11 @@ public class Soumission {
             System.exit(-4);
         }
     }
-    private void validationGenre(int genre) throws ParamException{
-        if(genre == HOMME || genre == FEMME || genre == SANS_GENRE_OPT1 ||
-                genre == SANS_GENRE_OPT2){
+    private void validationGenre(int genre) throws ParamException {
+        if (genre == HOMME || genre == FEMME || genre == SANS_GENRE_OPT1
+                || genre == SANS_GENRE_OPT2) {
             this.genre = genre;
-        }else {
+        } else {
             throw new ParamException("Genre invalide.");
         }
     }
